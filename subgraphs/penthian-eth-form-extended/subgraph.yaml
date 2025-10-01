@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: RegistrationForm
+    network: mainnet
+    source:
+      address: "0xBD18D356293Ab4772fA8dEf734726111049F2Bf2"
+      abi: RegistrationForm
+      startBlock: 23040708
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - PausedStatus
+        - RegistrationFeesChanged
+        - RequestStatus
+      abis:
+        - name: RegistrationForm
+          file: ./abis/RegistrationForm.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PausedStatus(indexed address,bool)
+          handler: handlePausedStatus
+        - event: RegistrationFeesChanged(uint256,uint256)
+          handler: handleRegistrationFeesChanged
+        - event: RequestStatus(indexed address,uint256,uint8,uint256)
+          handler: handleRequestStatus
+      file: ./src/registration-form.ts

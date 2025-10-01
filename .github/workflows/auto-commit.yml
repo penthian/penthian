@@ -1,0 +1,61 @@
+name: Auto Commit on Push
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch if different
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Disables the default token
+          fetch-depth: 0  # Fetches all history for all branches and tags
+
+      - name: Set up Git user
+        run: |
+          git config --global user.name 'sharozx16'
+          git config --global user.email 'sharozx16@gmail.com'
+
+      - name: Check if last commit was made by me
+        id: check_commit
+        run: |
+          COMMIT_AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+          echo "Commit author email: $COMMIT_AUTHOR_EMAIL"
+          if [ "$COMMIT_AUTHOR_EMAIL" = "sharozx16@gmail.com" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+          echo "commit_author_email=$COMMIT_AUTHOR_EMAIL" >> $GITHUB_OUTPUT
+
+      - name: Skip if last commit was by me
+        if: steps.check_commit.outputs.skip == 'true'
+        run: |
+          echo "Last commit was made by me. Skipping further actions."
+          exit 0
+
+      - name: Update README.md
+        run: |
+          # Insert the date and time at the top of README.md along with the commit author's email
+          COMMIT_AUTHOR_EMAIL="${{ steps.check_commit.outputs.commit_author_email }}"
+          # Create the new line to insert
+          NEW_LINE="Last update: $(date) ($COMMIT_AUTHOR_EMAIL)"
+          # Insert the new line at the top of README.md
+          sed -i "1s/^/$NEW_LINE\n\n/" README.md
+
+      - name: Commit changes
+        run: |
+          git add README.md
+          git commit -m "Automated update to README.md [skip ci]"
+
+      - name: Push changes
+        env:
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
+          git push origin HEAD:${{ github.ref }}

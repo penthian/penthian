@@ -1,0 +1,74 @@
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+0xf3545A1eaD63eD1A6d8b6E63d68D937cdBf1aeE4 umarfarooq@decryptedlabs.io
+////////////////////////////////////////////////////////////////////////////////////////////////////
+========================================== FORM ========================================== 
+graph auth --studio cfbdd41b96d20a5628b8687e90c3efba
+cd bitstaker-rwa-sepolia-form
+graph codegen && graph build  && graph deploy bitstaker-rwa-sepolia-form --studio -l v0.0.2
+
+
+graph init --studio bitstaker-rwa-sepolia-form --protocol ethereum --network sepolia --from-contract 0x29b2f8d17107B134f94d75D25909a2b1b7d06326 --abi ./formAbi.json --start-block 8539636 --contract-name RegistrationForm
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-form/v0.0.1
+
+graph init --studio bitstaker-rwa-sepolia-form --protocol ethereum --network sepolia --from-contract 0xBFC5E44b50329ca13Ea784cd2C2266f735C65860 --abi ./formAbi.json --start-block 8816433 --contract-name RegistrationForm
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-form/v0.0.2
+
+
+========================================== MARKET ========================================== 
+
+graph auth --studio cfbdd41b96d20a5628b8687e90c3efba
+cd bitstaker-rwa-sepolia-market
+graph codegen && graph build && graph deploy bitstaker-rwa-sepolia-market --studio -l v0.0.2
+
+
+graph init --studio bitstaker-rwa-sepolia-market --protocol ethereum --network sepolia --from-contract 0x5D1e4c0E12F6d289537740Fc2e7043df4D7542Ad --abi ./marketAbi.json --start-block 8539637 --contract-name MarketPlace
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-market/v0.0.1
+
+graph init --studio bitstaker-rwa-sepolia-market --protocol ethereum --network sepolia --from-contract 0x27C4d57cc9e8535bf9609EE6E1f9AB9d8c3E7A3e --abi ./marketAbi.json --start-block 8816418 --contract-name MarketPlace
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-market/v0.0.2
+
+
+
+========================================== RENT ========================================== 
+graph auth --studio cfbdd41b96d20a5628b8687e90c3efba 
+cd bitstaker-rwa-sepolia-rent && graph codegen && graph build && graph deploy bitstaker-rwa-sepolia-rent --studio -l v0.0.2
+
+
+graph init --studio bitstaker-rwa-sepolia-rent --protocol ethereum --network sepolia --from-contract 0x7a0f833D6634408445DC78274Cc208DD49914088 --abi ./rentAbi.json --start-block 8581918 --contract-name Rent
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-rent/v0.0.1
+
+graph init --studio bitstaker-rwa-sepolia-rent --protocol ethereum --network sepolia --from-contract 0xaBbd689Cee890D645ea1D89F5F9146b4964293B3 --abi ./rentAbi.json --start-block 8816453 --contract-name Rent
+https://api.studio.thegraph.com/query/72710/bitstaker-rwa-sepolia-rent/v0.0.2
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+0x5cbD5063DdaE154c546860e2A4D2C16E2e1C786c vowinil223@calorpg.com
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+========================================== VOTING ========================================== 
+graph auth --studio d5f30e4606777992cd77415c63222d48
+cd bitstaker-rwa-sepolia-voting && graph codegen && graph build && graph deploy bitstaker-rwa-sepolia-voting --studio -l v0.0.3
+
+
+graph init --studio bitstaker-rwa-sepolia-voting --protocol ethereum --network sepolia --from-contract 0xDA55bB3db0d24B1225b9eBF059391e961DDB3B8D --abi ./votingAbi.json --start-block 8582468 --contract-name Voting
+https://api.studio.thegraph.com/query/114282/bitstaker-rwa-sepolia-voting/v0.0.1
+
+graph init --studio bitstaker-rwa-sepolia-voting --protocol ethereum --network sepolia --from-contract 0x23a05bc159a90157B9ddf04075A01Fd392C51Eea --abi ./votingAbi.json --start-block 8816456 --contract-name Voting
+https://api.studio.thegraph.com/query/114282/bitstaker-rwa-sepolia-voting/v0.0.2
+
+graph init --studio bitstaker-rwa-sepolia-voting --protocol ethereum --network sepolia --from-contract 0x0675D7f6434aFDD724507e41f9f0bb5C39Ce166B --abi ./votingAbi.json --start-block 8840649 --contract-name Voting
+https://api.studio.thegraph.com/query/114282/bitstaker-rwa-sepolia-voting/v0.0.3
+
+
+========================================== RWA ========================================== 
+graph auth --studio d5f30e4606777992cd77415c63222d48
+cd bitstaker-rwa-sepolia-rwa && graph codegen && graph build && graph deploy bitstaker-rwa-sepolia-rwa --studio -l v0.0.2
+
+graph init --studio bitstaker-rwa-sepolia-rwa --protocol ethereum --network sepolia --from-contract 0xf4BFA2a806898346410bb22CabE133A5e6f5BA8D --abi ./rwaAbi.json --start-block 8816416 --contract-name RWA
+https://api.studio.thegraph.com/query/114282/bitstaker-rwa-sepolia-rwa/v0.0.2
+
+
+

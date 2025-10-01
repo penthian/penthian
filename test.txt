@@ -1,0 +1,83 @@
+// LandingPageHeader.tsx
+
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { DashboardNav } from "./dashboard-nav";
+import { MobileSidebar } from "./mobile-sidebar";
+import { Button } from "../ui/button";
+import LandingPageContainer from "./LandingPageContainer";
+import { navItems } from "@/app/assets/header-links";
+import { useEffect, useState } from "react";
+
+const LandingPageHeader = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 40) {
+        // scrolling down
+        setShowHeader(false);
+      } else {
+        // scrolling up
+        setShowHeader(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <LandingPageContainer className="z-[1000] max-w-full bg-transparent sticky top-5">
+      <header className={`fixed top-0 mx-auto min-w-60 eft-0 z-50 w-full text-white um_transition duration-500 
+
+      backdrop-blur-md bg-black/40 border border-white/30
+    flex w-full items-center justify-between py-4 max-w-screen-lg
+            ${showHeader ? 'translate-y-3 xl:translate-y-1 3xl:translate-y-5' : '-translate-y-28'}`}>
+        <Link href={"/"}>
+          <Image
+            src="/assets/logo.svg"
+            alt="Logo"
+            width={200}
+            height={40}
+            className="hidden sm:block h-14"
+          />
+          <Image
+            src="/assets/logo.svg"
+            alt="Logo COD"
+            width={150}
+            height={30}
+            className="block sm:hidden"
+          />
+        </Link>
+        <div className="navbar:flex hidden items-center gap-5">
+          <DashboardNav items={navItems} />
+          <Link href={"/dashboard/primary-marketplace"}>
+            <Button size='lg' variant='secondary' className="text-base 3xl:text-lg">
+              Start&nbsp;Investing
+            </Button>
+          </Link>
+        </div>
+
+        <div className="flex navbar:hidden items-center justify-between gap-5">
+
+          <MobileSidebar items={navItems} />
+        </div>
+      </header>
+    </LandingPageContainer>
+  );
+};
+
+export default LandingPageHeader;

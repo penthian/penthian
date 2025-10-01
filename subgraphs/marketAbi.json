@@ -1,0 +1,1182 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "rwaAddress_", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "platformFeeBips_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minListingPriceBips_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minBidIncrementBips_",
+        "type": "uint256"
+      },
+      { "internalType": "uint256", "name": "_referralBips", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "NftMarketplace__ActionRestricted", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__AlreadyListed", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__AuctionAlreadyConcluded",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__AuctionHasCancelled",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__AuctionHasStarted",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__AuctionNotExpired",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__AuctionNotFound", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__AuctionNotStartedYet",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__CantBuyYourListing",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__CantPlaceBid", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidAddress", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidAgent", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidAmount", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_bidRequired", "type": "uint256" },
+      { "internalType": "uint256", "name": "_yourBid", "type": "uint256" }
+    ],
+    "name": "NftMarketplace__InvalidBid",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__InvalidBipsValue", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidCurrency", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidDuration", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidFeeAmount", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidPrice", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__InvalidReferral", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__InvalidReferralBips",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__NoCommissionAvailable",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__NotApproved", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__NotEligible", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__NotEnoughBalance", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__NotEnoughSharesAvailable",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__PrimarySaleAlreadyConcluded",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__PrimarySaleEnded", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__PrimarySaleNotEndedYet",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__PropertyDoesNotExists",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__PropertyIsDelisted",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NftMarketplace__SaleNotEndedYet", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__SaleNotFound", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__SameAction", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__SellPriceTooLow", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__TransferFailed", "type": "error" },
+  { "inputs": [], "name": "NftMarketplace__YouAreNotOwner", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NftMarketplace__YouAreNotWhitelistedAgent",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_agent",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_isWhitelisted",
+        "type": "bool"
+      }
+    ],
+    "name": "AgentWhitelistUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_auctionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuctionConcluded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_auctionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_noOfShares",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_endTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuctionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "Blacklisted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldReferralBips",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newReferralBips",
+        "type": "uint256"
+      }
+    ],
+    "name": "DefaultReferralBipsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_agent",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_bips",
+        "type": "uint256"
+      }
+    ],
+    "name": "ExclusiveReferralBipsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldBips",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newBips",
+        "type": "uint256"
+      }
+    ],
+    "name": "MinBidIncrementBipsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldBips",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newBips",
+        "type": "uint256"
+      }
+    ],
+    "name": "MinListingPriceBipsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_bidder",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_auctionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_bid",
+        "type": "uint256"
+      }
+    ],
+    "name": "PlacedBid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldFee",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newFee",
+        "type": "uint256"
+      }
+    ],
+    "name": "PlatformFeeUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum MarketPlace.PrimarySaleState",
+        "name": "_status",
+        "type": "uint8"
+      }
+    ],
+    "name": "PrimarySaleStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_agent",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_sharesBought",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_investment",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_marketFees",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_commissionFees",
+        "type": "uint256"
+      }
+    ],
+    "name": "PrimarySharesBought",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_noOfShares",
+        "type": "uint256"
+      }
+    ],
+    "name": "PrimarySharesClaimed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_referee",
+        "type": "address"
+      }
+    ],
+    "name": "ReferralAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_agent",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_commissionInETH",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_commissionInUSDC",
+        "type": "uint256"
+      }
+    ],
+    "name": "ReferralCommissionClaimed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_listingId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum MarketPlace.SecondarySaleState",
+        "name": "_status",
+        "type": "uint8"
+      }
+    ],
+    "name": "SecondarySaleStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_sharesBought",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_investment",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_marketFees",
+        "type": "uint256"
+      }
+    ],
+    "name": "SecondarySharesBought",
+    "type": "event"
+  },
+  { "stateMutability": "payable", "type": "fallback" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_agent", "type": "address" },
+      { "internalType": "uint256", "name": "_bips", "type": "uint256" }
+    ],
+    "name": "addExclusiveReferralBips",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "listingId", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "sharesToBuy",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketPlace.Purchase[]",
+        "name": "_properties",
+        "type": "tuple[]"
+      },
+      { "internalType": "address", "name": "_recipient", "type": "address" }
+    ],
+    "name": "bulkBuySecondarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_recipient", "type": "address" },
+      { "internalType": "address", "name": "_currency", "type": "address" },
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_sharesToBuy", "type": "uint256" },
+      {
+        "internalType": "address",
+        "name": "_referralAddress",
+        "type": "address"
+      }
+    ],
+    "name": "buyPrimaryShares",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "listingId", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "sharesToBuy",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketPlace.Purchase",
+        "name": "_property",
+        "type": "tuple"
+      },
+      { "internalType": "address", "name": "_recipient", "type": "address" },
+      { "internalType": "address", "name": "_currency", "type": "address" }
+    ],
+    "name": "buySecondaryShares",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_auctionId", "type": "uint256" }
+    ],
+    "name": "cancelAuction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_listingId", "type": "uint256" }
+    ],
+    "name": "cancelSecondarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "newReferralBips",
+        "type": "uint256"
+      }
+    ],
+    "name": "changeDefaultReferralBips",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_newFees", "type": "uint256" }
+    ],
+    "name": "changePlateFormFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "claimPendingSharesOrFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "claimReferralCommission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_auctionId", "type": "uint256" }
+    ],
+    "name": "concludeAuction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "concludePrimarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_noOfShares", "type": "uint256" },
+      { "internalType": "uint256", "name": "_basePrice", "type": "uint256" },
+      { "internalType": "uint256", "name": "_startTime", "type": "uint256" },
+      { "internalType": "uint256", "name": "_endTime", "type": "uint256" }
+    ],
+    "name": "createAuction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_auctionId", "type": "uint256" }
+    ],
+    "name": "getAuctionDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "propertyId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "noOfShares",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "basePrice", "type": "uint256" },
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "highestBid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "highestBidder",
+            "type": "address"
+          },
+          { "internalType": "address", "name": "seller", "type": "address" },
+          {
+            "internalType": "enum MarketPlace.AuctionState",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct MarketPlace.AuctionDetails",
+        "name": "_details",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getDefaultReferralBips",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_agent", "type": "address" }
+    ],
+    "name": "getExclusiveReferralBips",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMinBidIncrementBips",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMinListingPriceBips",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_buyer", "type": "address" },
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getPendingSharesDetails",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "shares", "type": "uint256" },
+          { "internalType": "uint256", "name": "usdcSpent", "type": "uint256" },
+          { "internalType": "uint256", "name": "ethSpent", "type": "uint256" }
+        ],
+        "internalType": "struct MarketPlace.PendingShares",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPlatformFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getPrimarySale",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "seller", "type": "address" },
+          { "internalType": "uint256", "name": "endTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "sharesMinimumWorth",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalShares",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sharesRemaining",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "usdcReceived",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "ethReceived",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "marketFeesInUSDC",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "marketFeesInETH",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketPlace.PrimaryListing",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getPrimarySaleState",
+    "outputs": [
+      {
+        "internalType": "enum MarketPlace.PrimarySaleState",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_currency", "type": "address" },
+      { "internalType": "uint256", "name": "_shareToBuy", "type": "uint256" },
+      { "internalType": "uint256", "name": "_pricePerShare", "type": "uint256" }
+    ],
+    "name": "getQuote",
+    "outputs": [
+      { "internalType": "uint256", "name": "_outputAmount", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_referee", "type": "address" },
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getReferralCommission",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "commissionInETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "commissionInUSDC",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketPlace.Commission",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_listingId", "type": "uint256" }
+    ],
+    "name": "getSecondaryListing",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "seller", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "propertyId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sharesRemaining",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketPlace.SecondaryListing",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTotalListings",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_agent", "type": "address" }
+    ],
+    "name": "isAgentWhitelisted",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "isBlacklisted",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" },
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" },
+      { "internalType": "bytes", "name": "", "type": "bytes" }
+    ],
+    "name": "onERC1155BatchReceived",
+    "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "bytes", "name": "", "type": "bytes" }
+    ],
+    "name": "onERC1155Received",
+    "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_auctionId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_bid", "type": "uint256" }
+    ],
+    "name": "placeBid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_noOfShares", "type": "uint256" },
+      { "internalType": "uint256", "name": "_pricePerShare", "type": "uint256" }
+    ],
+    "name": "secondarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_newBips", "type": "uint256" }
+    ],
+    "name": "setMinBidIncrementBips",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_newBips", "type": "uint256" }
+    ],
+    "name": "setMinListingPriceBips",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_seller", "type": "address" },
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_totalShares", "type": "uint256" },
+      { "internalType": "uint256", "name": "_endTime", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_sharesMinimumWorth",
+        "type": "uint256"
+      }
+    ],
+    "name": "startPrimarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+    ],
+    "name": "supportsInterface",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_agent", "type": "address" },
+      { "internalType": "bool", "name": "_status", "type": "bool" }
+    ],
+    "name": "updateAgentWhitelistStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "_users", "type": "address[]" },
+      { "internalType": "bool", "name": "_newStatus", "type": "bool" }
+    ],
+    "name": "updateBlacklist",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_listingId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_noOfShares", "type": "uint256" },
+      { "internalType": "uint256", "name": "_pricePerShare", "type": "uint256" }
+    ],
+    "name": "updateSecondarySale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
+]

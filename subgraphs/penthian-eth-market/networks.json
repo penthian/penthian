@@ -1,0 +1,8 @@
+{
+  "mainnet": {
+    "MarketPlace": {
+      "address": "0x929ef3B85db9b0c2cd2e22c9A3aeeF956fE16b2A",
+      "startBlock": 23040692
+    }
+  }
+}

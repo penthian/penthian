@@ -1,0 +1,553 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  { "inputs": [], "name": "ActionRestricted", "type": "error" },
+  { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
+  { "inputs": [], "name": "CantApproveShares", "type": "error" },
+  { "inputs": [], "name": "CantTransferShares", "type": "error" },
+  { "inputs": [], "name": "CommunityNotRegistered", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "uint256", "name": "balance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "ERC1155InsufficientBalance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "approver", "type": "address" }
+    ],
+    "name": "ERC1155InvalidApprover",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "idsLength", "type": "uint256" },
+      { "internalType": "uint256", "name": "valuesLength", "type": "uint256" }
+    ],
+    "name": "ERC1155InvalidArrayLength",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "operator", "type": "address" }
+    ],
+    "name": "ERC1155InvalidOperator",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "receiver", "type": "address" }
+    ],
+    "name": "ERC1155InvalidReceiver",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "sender", "type": "address" }
+    ],
+    "name": "ERC1155InvalidSender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "operator", "type": "address" },
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "ERC1155MissingApprovalForAll",
+    "type": "error"
+  },
+  { "inputs": [], "name": "InvalidAPR", "type": "error" },
+  { "inputs": [], "name": "InvalidAddress", "type": "error" },
+  { "inputs": [], "name": "InvalidPrice", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "PropertyAlreadyDelisted", "type": "error" },
+  { "inputs": [], "name": "PropertyNotExists", "type": "error" },
+  { "inputs": [], "name": "PropertyNotInClaimState", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldApr",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newApr",
+        "type": "uint256"
+      }
+    ],
+    "name": "APRChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "name": "ApprovalForAll",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      }
+    ],
+    "name": "PropertyDelisted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "ids",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "values",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "TransferBatch",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "TransferSingle",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "URI",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" },
+      { "internalType": "uint256", "name": "id", "type": "uint256" }
+    ],
+    "name": "balanceOf",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "accounts", "type": "address[]" },
+      { "internalType": "uint256[]", "name": "ids", "type": "uint256[]" }
+    ],
+    "name": "balanceOfBatch",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_newAprBips", "type": "uint256" }
+    ],
+    "name": "changePropertyAPR",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_newPricePerShare",
+        "type": "uint256"
+      }
+    ],
+    "name": "changePropertyPrice",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" },
+      { "internalType": "string", "name": "_newUri", "type": "string" }
+    ],
+    "name": "changeUri",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "delistProperty",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_userAddress", "type": "address" },
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getHoldingHistory",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "getPropertyDetails",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "owner", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalOwners",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "aprBips", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalShares",
+            "type": "uint256"
+          },
+          { "internalType": "string", "name": "uri", "type": "string" }
+        ],
+        "internalType": "struct RWA.Property",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_formAddress", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_marketplaceAddress",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" },
+      { "internalType": "address", "name": "operator", "type": "address" }
+    ],
+    "name": "isApprovedForAll",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "name": "isPropertyDelisted",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_userAddress", "type": "address" }
+    ],
+    "name": "isRegistered",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "owner", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalOwners",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "aprBips", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "totalShares",
+            "type": "uint256"
+          },
+          { "internalType": "string", "name": "uri", "type": "string" }
+        ],
+        "internalType": "struct RWA.Property",
+        "name": "_property",
+        "type": "tuple"
+      },
+      { "internalType": "uint256", "name": "_saleTime", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_sharesMinimumWorth",
+        "type": "uint256"
+      }
+    ],
+    "name": "register",
+    "outputs": [
+      { "internalType": "uint256", "name": "_propertyId", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256[]", "name": "ids", "type": "uint256[]" },
+      { "internalType": "uint256[]", "name": "values", "type": "uint256[]" },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "safeBatchTransferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "safeTransferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "operator", "type": "address" },
+      { "internalType": "bool", "name": "approved", "type": "bool" }
+    ],
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+    ],
+    "name": "supportsInterface",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalProperties",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" }],
+    "name": "uri",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
+]

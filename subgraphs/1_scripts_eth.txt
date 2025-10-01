@@ -1,0 +1,72 @@
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+0xc9D0274c61ad870Fc86C818B1C1B7BA4200b2404 info@penthian.com 0xumarfarooq@gmail.com
+////////////////////////////////////////////////////////////////////////////////////////////////////
+========================================== FORM ========================================== 
+graph auth --studio 9e12a9d2c170f0f262020024890d8bd2
+cd penthian-eth-form && graph codegen && graph build  && graph deploy penthian-eth-form --studio -l v0.0.1
+
+
+graph init --studio penthian-eth-form --protocol ethereum --network mainnet --from-contract 0xBD18D356293Ab4772fA8dEf734726111049F2Bf2 --abi ./formAbi.json --start-block 23040708 --contract-name RegistrationForm
+https://api.studio.thegraph.com/query/112121/penthian-eth-form/v0.0.1
+
+
+========================================== MARKET ========================================== 
+
+graph auth --studio 9e12a9d2c170f0f262020024890d8bd2
+cd penthian-eth-market && graph codegen && graph build && graph deploy penthian-eth-market --studio -l v0.0.1
+
+
+graph init --studio penthian-eth-market --protocol ethereum --network mainnet --from-contract 0x929ef3B85db9b0c2cd2e22c9A3aeeF956fE16b2A --abi ./marketAbi.json --start-block 23040692 --contract-name MarketPlace
+https://api.studio.thegraph.com/query/112121/penthian-eth-market/v0.0.1
+
+
+
+========================================== RWA ========================================== 
+graph auth --studio 9e12a9d2c170f0f262020024890d8bd2
+cd penthian-eth-rwa && graph codegen && graph build && graph deploy penthian-eth-rwa --studio -l v0.0.1
+
+graph init --studio penthian-eth-rwa --protocol ethereum --network mainnet --from-contract 0x66Cc6c0765e197eBF7795927615983C5cAe41C00 --abi ./rwaAbi.json --start-block 23040513 --contract-name RWA
+https://api.studio.thegraph.com/query/112121/penthian-eth-rwa/v0.0.1
+
+
+
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+==================================================================================== 
+
+//TODO: need to change sub graph deployment
+========================================== RENT ========================================== 
+graph auth --studio 066e0601f5f40e1286fc57a4c3aa001c 
+cd penthian-eth-rent && graph codegen && graph build && graph deploy penthian-eth-rent --studio -l v0.0.1
+
+
+graph init --studio penthian-eth-rent --protocol ethereum --network mainnet --from-contract 0x6E48a0A26dAA9EFB3DEC25b91c1c704ac0569a28 --abi ./rentAbi.json --start-block 23040719 --contract-name Rent
+https://api.studio.thegraph.com/query/112121/penthian-eth-rent/v0.0.1
+
+
+
+
+========================================== VOTING ========================================== 
+graph auth --studio 066e0601f5f40e1286fc57a4c3aa001c
+cd penthian-eth-vote && graph codegen && graph build && graph deploy penthian-eth-vote --studio -l v0.0.1
+
+
+graph init --studio penthian-eth-vote --protocol ethereum --network mainnet --from-contract 0xc30432118807C7AF7B09bfA43E5AFbA1ec3Ea3A2 --abi ./votingAbi.json --start-block 23040747 --contract-name Voting
+https://api.studio.thegraph.com/query/112121/penthian-eth-vote/v0.0.1
+
+
+
+
+
+
+

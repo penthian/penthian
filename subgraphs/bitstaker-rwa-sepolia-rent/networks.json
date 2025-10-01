@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "Rent": {
+      "address": "0xaBbd689Cee890D645ea1D89F5F9146b4964293B3",
+      "startBlock": 8816453
+    }
+  }
+}

@@ -1,0 +1,277 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_rwaAddress", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_marketAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "registrationFees_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "ActionPaused", "type": "error" },
+  { "inputs": [], "name": "BlacklistedUser", "type": "error" },
+  { "inputs": [], "name": "InvalidAPR", "type": "error" },
+  { "inputs": [], "name": "InvalidForm", "type": "error" },
+  { "inputs": [], "name": "InvalidThreshold", "type": "error" },
+  { "inputs": [], "name": "InvalidTime", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_oldFees", "type": "uint256" },
+      { "internalType": "uint256", "name": "_newFees", "type": "uint256" }
+    ],
+    "name": "SameFees",
+    "type": "error"
+  },
+  { "inputs": [], "name": "SameState", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_isPaused",
+        "type": "bool"
+      }
+    ],
+    "name": "PausedStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_oldFees",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newFees",
+        "type": "uint256"
+      }
+    ],
+    "name": "RegistrationFeesChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_requestId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum RegistrationForm.Status",
+        "name": "_status",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_propertyId",
+        "type": "uint256"
+      }
+    ],
+    "name": "RequestStatus",
+    "type": "event"
+  },
+  {
+    "inputs": [{ "internalType": "bool", "name": "isPaused_", "type": "bool" }],
+    "name": "changeIsPaused",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_newFees", "type": "uint256" }
+    ],
+    "name": "changeRegistrationFees",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getIsPaused",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getRegistrationFees",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_requestNo", "type": "uint256" }
+    ],
+    "name": "getRequests",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "owner", "type": "address" },
+          {
+            "internalType": "enum RegistrationForm.Status",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalShares",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "aprBips", "type": "uint256" },
+          { "internalType": "uint256", "name": "saleTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "registrationFeesPaid",
+            "type": "uint256"
+          },
+          { "internalType": "string", "name": "uri", "type": "string" }
+        ],
+        "internalType": "struct RegistrationForm.Form",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTotalRequests",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "owner", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalShares",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "aprBips", "type": "uint256" },
+          { "internalType": "uint256", "name": "saleTime", "type": "uint256" },
+          { "internalType": "string", "name": "uri", "type": "string" }
+        ],
+        "internalType": "struct RegistrationForm.InputForm",
+        "name": "_form",
+        "type": "tuple"
+      }
+    ],
+    "name": "registerProperty",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_requestNo", "type": "uint256" },
+      { "internalType": "uint256", "name": "_threshold", "type": "uint256" },
+      { "internalType": "bool", "name": "_action", "type": "bool" }
+    ],
+    "name": "validateForms",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

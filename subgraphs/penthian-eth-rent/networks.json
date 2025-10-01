@@ -1,0 +1,8 @@
+{
+  "mainnet": {
+    "Rent": {
+      "address": "0x6E48a0A26dAA9EFB3DEC25b91c1c704ac0569a28",
+      "startBlock": 23040719
+    }
+  }
+}

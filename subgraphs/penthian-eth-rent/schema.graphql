@@ -1,0 +1,39 @@
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertyReset @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _rent: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RentStatus @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _monthRent: BigInt! # uint256
+  _status: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RentWithdrawn @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _rent: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

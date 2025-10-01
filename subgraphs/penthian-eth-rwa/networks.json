@@ -1,0 +1,8 @@
+{
+  "mainnet": {
+    "RWA": {
+      "address": "0x66Cc6c0765e197eBF7795927615983C5cAe41C00",
+      "startBlock": 23040513
+    }
+  }
+}

@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Voting
+    network: mainnet
+    source:
+      address: "0xc30432118807C7AF7B09bfA43E5AFbA1ec3Ea3A2"
+      abi: Voting
+      startBlock: 23040747
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - FeesChanged
+        - OwnershipTransferred
+        - ProposalStatus
+        - Voted
+      abis:
+        - name: Voting
+          file: ./abis/Voting.json
+      eventHandlers:
+        - event: FeesChanged(indexed address,uint256,uint256)
+          handler: handleFeesChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProposalStatus(indexed address,uint256,uint256)
+          handler: handleProposalStatus
+        - event: Voted(indexed address,uint256,bool)
+          handler: handleVoted
+      file: ./src/voting.ts

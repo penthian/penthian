@@ -1,0 +1,37 @@
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PausedStatus @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _isPaused: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RegistrationFeesChanged @entity(immutable: true) {
+  id: Bytes!
+  _oldFees: BigInt! # uint256
+  _newFees: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RequestStatus @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _requestId: BigInt! # uint256
+  _status: Int! # uint8
+  _propertyId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

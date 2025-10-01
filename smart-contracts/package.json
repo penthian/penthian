@@ -1,0 +1,34 @@
+{
+  "scripts": {
+    "clean": "npx hardhat clean && npx hardhat node",
+    "test-hardhat": "npx hardhat run scripts/mlm-test-deploy.js",
+    "test-hardhat-api": "npx hardhat run scripts/mlm-test-api.js",
+    "test-local": "npx hardhat run scripts/mlm-test-deploy.js --network localhost",
+    "test-local-api": "npx hardhat run scripts/mlm-test-api.js --network localhost",
+    "test-testnet": "npx hardhat run scripts/mlm-test-deploy.js --network tbsc"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-ignition": "^0.15.0",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.1.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.0.0",
+    "chai": "^4.2.0",
+    "ethers": "^6.4.0",
+    "hardhat": "^2.22.5",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.8.0",
+    "typechain": "^8.3.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-periphery": "^1.4.4",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5"
+  }
+}

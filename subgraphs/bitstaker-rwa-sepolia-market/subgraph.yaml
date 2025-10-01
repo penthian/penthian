@@ -1,0 +1,77 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MarketPlace
+    network: sepolia
+    source:
+      address: "0x27C4d57cc9e8535bf9609EE6E1f9AB9d8c3E7A3e"
+      abi: MarketPlace
+      startBlock: 8816418
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AgentWhitelistUpdated
+        - AuctionConcluded
+        - AuctionCreated
+        - Blacklisted
+        - DefaultReferralBipsUpdated
+        - ExclusiveReferralBipsUpdated
+        - MinBidIncrementBipsUpdated
+        - MinListingPriceBipsUpdated
+        - OwnershipTransferred
+        - PlacedBid
+        - PlatformFeeUpdated
+        - PrimarySaleStatus
+        - PrimarySharesBought
+        - PrimarySharesClaimed
+        - ReferralAdded
+        - ReferralCommissionClaimed
+        - SecondarySaleStatus
+        - SecondarySharesBought
+      abis:
+        - name: MarketPlace
+          file: ./abis/MarketPlace.json
+      eventHandlers:
+        - event: AgentWhitelistUpdated(indexed address,indexed address,bool)
+          handler: handleAgentWhitelistUpdated
+        - event: AuctionConcluded(indexed address,uint256)
+          handler: handleAuctionConcluded
+        - event: AuctionCreated(indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleAuctionCreated
+        - event: Blacklisted(indexed address,bool)
+          handler: handleBlacklisted
+        - event: DefaultReferralBipsUpdated(uint256,uint256)
+          handler: handleDefaultReferralBipsUpdated
+        - event: ExclusiveReferralBipsUpdated(indexed address,uint256)
+          handler: handleExclusiveReferralBipsUpdated
+        - event: MinBidIncrementBipsUpdated(uint256,uint256)
+          handler: handleMinBidIncrementBipsUpdated
+        - event: MinListingPriceBipsUpdated(uint256,uint256)
+          handler: handleMinListingPriceBipsUpdated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PlacedBid(indexed address,uint256,uint256)
+          handler: handlePlacedBid
+        - event: PlatformFeeUpdated(indexed address,uint256,uint256)
+          handler: handlePlatformFeeUpdated
+        - event: PrimarySaleStatus(indexed address,uint256,uint8)
+          handler: handlePrimarySaleStatus
+        - event: PrimarySharesBought(indexed address,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handlePrimarySharesBought
+        - event: PrimarySharesClaimed(indexed address,uint256,uint256)
+          handler: handlePrimarySharesClaimed
+        - event: ReferralAdded(indexed address,indexed address)
+          handler: handleReferralAdded
+        - event: ReferralCommissionClaimed(indexed address,uint256,uint256)
+          handler: handleReferralCommissionClaimed
+        - event: SecondarySaleStatus(indexed address,uint256,uint256,uint8)
+          handler: handleSecondarySaleStatus
+        - event: SecondarySharesBought(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleSecondarySharesBought
+      file: ./src/market-place.ts

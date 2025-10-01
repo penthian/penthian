@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Rent
+    network: sepolia
+    source:
+      address: "0xaBbd689Cee890D645ea1D89F5F9146b4964293B3"
+      abi: Rent
+      startBlock: 8816453
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - PropertyReset
+        - RentStatus
+        - RentWithdrawn
+      abis:
+        - name: Rent
+          file: ./abis/Rent.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PropertyReset(indexed address,uint256,uint256)
+          handler: handlePropertyReset
+        - event: RentStatus(indexed address,uint256,uint256,uint8)
+          handler: handleRentStatus
+        - event: RentWithdrawn(indexed address,uint256,uint256)
+          handler: handleRentWithdrawn
+      file: ./src/rent.ts

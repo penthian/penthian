@@ -1,0 +1,181 @@
+type AgentWhitelistUpdated @entity(immutable: true) {
+  id: Bytes!
+  _owner: Bytes! # address
+  _agent: Bytes! # address
+  _isWhitelisted: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuctionConcluded @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _auctionId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuctionCreated @entity(immutable: true) {
+  id: Bytes!
+  _seller: Bytes! # address
+  _auctionId: BigInt! # uint256
+  _propertyId: BigInt! # uint256
+  _noOfShares: BigInt! # uint256
+  _startTime: BigInt! # uint256
+  _endTime: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Blacklisted @entity(immutable: true) {
+  id: Bytes!
+  _user: Bytes! # address
+  _status: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DefaultReferralBipsUpdated @entity(immutable: true) {
+  id: Bytes!
+  _oldReferralBips: BigInt! # uint256
+  _newReferralBips: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExclusiveReferralBipsUpdated @entity(immutable: true) {
+  id: Bytes!
+  _agent: Bytes! # address
+  _bips: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MinBidIncrementBipsUpdated @entity(immutable: true) {
+  id: Bytes!
+  _oldBips: BigInt! # uint256
+  _newBips: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MinListingPriceBipsUpdated @entity(immutable: true) {
+  id: Bytes!
+  _oldBips: BigInt! # uint256
+  _newBips: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlacedBid @entity(immutable: true) {
+  id: Bytes!
+  _bidder: Bytes! # address
+  _auctionId: BigInt! # uint256
+  _bid: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlatformFeeUpdated @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _oldFee: BigInt! # uint256
+  _newFee: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PrimarySaleStatus @entity(immutable: true) {
+  id: Bytes!
+  _seller: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _status: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PrimarySharesBought @entity(immutable: true) {
+  id: Bytes!
+  _buyer: Bytes! # address
+  _agent: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _sharesBought: BigInt! # uint256
+  _investment: BigInt! # uint256
+  _marketFees: BigInt! # uint256
+  _commissionFees: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PrimarySharesClaimed @entity(immutable: true) {
+  id: Bytes!
+  _user: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _noOfShares: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReferralAdded @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _referee: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReferralCommissionClaimed @entity(immutable: true) {
+  id: Bytes!
+  _agent: Bytes! # address
+  _commissionInETH: BigInt! # uint256
+  _commissionInUSDC: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SecondarySaleStatus @entity(immutable: true) {
+  id: Bytes!
+  _seller: Bytes! # address
+  _listingId: BigInt! # uint256
+  _propertyId: BigInt! # uint256
+  _status: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SecondarySharesBought @entity(immutable: true) {
+  id: Bytes!
+  _buyer: Bytes! # address
+  _propertyId: BigInt! # uint256
+  _sharesBought: BigInt! # uint256
+  _investment: BigInt! # uint256
+  _marketFees: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

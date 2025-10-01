@@ -1,0 +1,38 @@
+type FeesChanged @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _oldFees: BigInt! # uint256
+  _newFees: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProposalStatus @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _proposalId: BigInt! # uint256
+  _endTime: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Voted @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _proposalId: BigInt! # uint256
+  _inFavor: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

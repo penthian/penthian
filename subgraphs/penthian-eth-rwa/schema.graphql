@@ -1,0 +1,70 @@
+type APRChanged @entity(immutable: true) {
+  id: Bytes!
+  _propertyId: BigInt! # uint256
+  _oldApr: BigInt! # uint256
+  _newApr: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ApprovalForAll @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertyDelisted @entity(immutable: true) {
+  id: Bytes!
+  _by: Bytes! # address
+  _propertyId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferBatch @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  ids: [BigInt!]! # uint256[]
+  values: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferSingle @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  RWA_id: BigInt! # uint256
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type URI @entity(immutable: true) {
+  id: Bytes!
+  value: String! # string
+  RWA_id: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

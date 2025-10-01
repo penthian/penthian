@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "RWA": {
+      "address": "0xf4BFA2a806898346410bb22CabE133A5e6f5BA8D",
+      "startBlock": 8816416
+    }
+  }
+}
